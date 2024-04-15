@@ -17,8 +17,28 @@ const Dummy_Meetups = [
     },
 ]
 
-const HomePage  =()=>{
-    return <MeetupList meetups={Dummy_Meetups} />
+const HomePage  =(props)=>{
+
+    return <MeetupList meetups={props.meetups} />
 }
+
+export async function getServerSideProps(context) {
+    const req = context.req;
+    const res = context.res;
+    return {
+        props : {
+            meetups : Dummy_Meetups
+        }
+    };
+}
+
+// export async function getStaticProps() {
+//     return {
+//         props : {
+//             meetups : Dummy_Meetups
+//         },
+//         revalidate : 1
+//     };
+// }
 
 export default HomePage;
